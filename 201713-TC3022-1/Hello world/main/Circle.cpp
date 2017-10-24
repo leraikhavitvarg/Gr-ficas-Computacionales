@@ -1,5 +1,5 @@
 #include "Circle.h"
-
+#include "Circle.h"
 
 Circle::Circle()
 {
@@ -33,21 +33,29 @@ double Circle::GetArea()
 
 }
 
-std::string Circle::GetColor()
-{
-	return _color;
-}
-
 void Circle::SetRadius(double r)
 {
 	_radius = r;
 
 }
 
-void Circle::SetColor(std::string c)
+void Circle::SetColor(string c);
 {
 	_color = c;
+
+
 }
 
+std::string Circle::GetColor();
+{
+	return _color;
 
+}
 
+Circle::Circle(float w);
+
+{
+	_width = w;
+	
+
+}
