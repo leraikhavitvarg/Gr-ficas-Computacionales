@@ -118,35 +118,47 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\tarea1.cpp" />
-    <ClCompile Include="Bufferito.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="InputFile.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Employee.cpp" />
-    <ClCompile Include="main2.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Shaderito.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="Shaderprogramito.cpp" />
+    <ClCompile Include="Texture2D.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="InputFile.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="Shaderito.h" />
     <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="Shaderprogramito.h" />
+    <ClInclude Include="Texture2D.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\Prueba.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Default.frag" />
+    <None Include="..\..\mel\GCa01169675-master\Project1\Default.frag" />
+    <None Include="..\..\mel\GCa01169675-master\Project1\Default.vert" />
+    <None Include="..\..\mel\GCa01169675-master\Project1\PhongShader.vert" />
+    <None Include="PhongShader.frag" />
     <None Include="Default.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="201713-TC3022-1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textura_pizarron.png" />
+    <Image Include="textura_rosita.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

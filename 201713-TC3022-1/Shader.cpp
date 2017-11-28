@@ -1,44 +1,69 @@
 #include "Shader.h"
-#include <iostream>
-#include <GL/glew.h>
-#include <GL/freeglut.h>
-#include <glm/glm.hpp>
-#include <vector>
 
+#include "InputFile.h"
+#include <iostream>
+#include <vector>
 
 Shader::Shader()
 {
-	//El constructor nicializa los valores por default de las variables
-	GLuint _shaderHandle = 0;
+	_shaderHandle = 0;
 }
 
 Shader::~Shader()
 {
-	//El destructor borra el shader por la variable _shaderHandle
-	void glDeleteShader(GLuint _shaderHandle);
-	
+	glDeleteShader(_shaderHandle);
 }
 
 void Shader::CreateShader(std::string path, GLenum type)
 {
-	//Carga el código, crea y compila un archivo shader 
-	//path :codigo fuente del shader
-	void glCompileShader(GLuint path); 
+	InputFile ifile;
+	if (!ifile.Read(path)) return;
+	std::string source = ifile.GetContents();
 
-	//Nuevo shader tipo type y guarda su identificador en la variable _shaderHandle
-	_shaderHandle = type;
-	
-	void glDeleteShader(GLuint &_shaderHandle);
-	GLuint glCreateShader(GLenum type);
-	void glShaderSource(GLuint &_shaderHandle, GLsizei count, const GLchar** string, const GLint*length);
-	void glCompileShader(GLuint &_shaderHandle);
+	if (_shaderHandle)
+		glDeleteShader(_shaderHandle);
 
+	_shaderHandle = glCreateShader(type);
 
+	const GLchar *source_c = (const GLchar*)source.c_str();
+	glShaderSource(_shaderHandle, 1, &source_c, nullptr);
 
+	glCompileShader(_shaderHandle);
+
+	// Get compile status
+	GLint shaderCompileSuccess = 0;
+	glGetShaderiv(_shaderHandle, GL_COMPILE_STATUS, &shaderCompileSuccess);
+	if (shaderCompileSuccess == GL_FALSE)
+	{
+		// Get compile log length
+		GLint logLength = 0;
+		glGetShaderiv(_shaderHandle, GL_INFO_LOG_LENGTH, &logLength);
+		if (logLength > 0)
+		{
+
+			// Allocate memory for compile log
+			std::vector<GLchar> compileLog(logLength);
+
+			// Get compile log
+			glGetShaderInfoLog(_shaderHandle, logLength, &logLength, &compileLog[0]);
+
+			// Print compile log
+			for (int i = 0; i<logLength; i++)
+				std::cout << compileLog[i];
+			std::cout << std::endl;
+		}
+		std::cout << "Shader " << path << " did not compiled." << std::endl;
+
+		//We don't need the shader anymore.
+		glDeleteShader(_shaderHandle);
+
+		return;
+	}
+
+	std::cout << "Shader " << path << " compiled successfully" << std::endl;
 }
 
 GLuint Shader::GetHandle()
 {
-
 	return _shaderHandle;
 }
